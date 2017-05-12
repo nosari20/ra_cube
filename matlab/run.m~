@@ -16,14 +16,14 @@ ransac_thres = 1.5;
 Hwi = Hw0;
 fig_match = figure;
 I1 = rgb2gray(I);
-points1 = detectSURFFeatures(I1); % Strat 2
+points1 = detectMSERFeatures(I1); % Strat 2
 [f1, vpts1] = extractFeatures(I1, points1, 'Method','SURF'); %Strat 2
 for im_num = 2:length(files)
     fname = fullfile(img_path, files(im_num).name);
     I = imread(fname);
     I2 = rgb2gray(I);
     %points1 = detectSURFFeatures(I1); % Strat 1
-    points2 = detectSURFFeatures(I2);
+    points2 = detectMSERFeatures(I2);
     %[f1, vpts1] = extractFeatures(I1, points1, 'Method','SURF'); % Strat 1
     [f2, vpts2] = extractFeatures(I2, points2, 'Method','SURF'); 
     indexPairs = matchFeatures(f1, f2) ;
@@ -60,8 +60,7 @@ for im_num = 2:length(files)
             %% Visualize putative matches
             figure(fig_match);
             showMatchedFeatures(I1,I2,matchedPoints1(inliers_best),matchedPoints2(inliers_best),'montage');
-            Hwi = Hbest * Hw0 ;% Strat 2
-            %Hwi = Hbest * Hwi; %Strat 1 
+            Hwi = Hbest * Hwi; 
             P = H2P(Hwi,K);
             %% Visualize the projection matrix
             figure(fig_video);
