@@ -12,7 +12,7 @@ imshow(I);
 drawcube(P,1/2,s/2,1/2);
 %% Tracking de caméra
 ransac_ntests = 1000;
-ransac_thres = 1.5;
+ransac_thres = 3;
 Hwi = Hw0;
 fig_match = figure;
 I1 = rgb2gray(I);
